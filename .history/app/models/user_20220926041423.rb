@@ -8,25 +8,20 @@ class User < ApplicationRecord
   super
   end
 
-  ROLES = %w{super_admin admin manager salar}
+  ROLES = %w{super_admin admin manager}
 
-  ROLES.each do |role_name|
-    define_method "#{role_name}?" do
-      role == role_name
-    end
+
+  def super_admin?
+    role == 'super_admin'
   end
 
-  # def super_admin?
-  #   role == 'super_admin'
-  # end
+  def admin?
+    role == 'admin'
+  end
 
-  # def admin?
-  #   role == 'admin'
-  # end
-
-  # def manager?
-  #   role == 'manager'
-  # end
+  def manager?
+    role == 'manager'
+  end
 
 end
 

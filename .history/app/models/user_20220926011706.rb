@@ -7,26 +7,4 @@ class User < ApplicationRecord
   def jwt_payload
   super
   end
-
-  ROLES = %w{super_admin admin manager salar}
-
-  ROLES.each do |role_name|
-    define_method "#{role_name}?" do
-      role == role_name
-    end
-  end
-
-  # def super_admin?
-  #   role == 'super_admin'
-  # end
-
-  # def admin?
-  #   role == 'admin'
-  # end
-
-  # def manager?
-  #   role == 'manager'
-  # end
-
 end
-

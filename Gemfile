@@ -45,3 +45,4 @@ end
 gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'devise-jwt', '~> 0.10.0'
 gem 'cancancan'
+gem 'byebug'

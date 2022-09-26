@@ -1,8 +1,10 @@
 class Api::V1::CompaniesController < ApiController
-    before_action :set_company, only: [:show, :update, :destroy ]
     load_and_authorize_resource
+
+    before_action :set_company, only: [:show, :update, :destroy ]
     def index
-        @companies = Company.all
+        # @companies = Company.all
+        @companies = Company.accessible_by(current_ability)
         # @companies = current_user.companies
         render json: @companies
     end
@@ -12,7 +14,9 @@ class Api::V1::CompaniesController < ApiController
     end
 
     def create
-        @company = current_user.companies.new(c_params)
+        @company = Company.new(c_params)
+
+        puts '----------------------------------------------------------------------------------------------'
         if @company.save
             render json: @company, status: :ok
         else

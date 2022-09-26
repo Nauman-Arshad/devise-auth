@@ -4,11 +4,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :jwt_authenticatable, jwt_revocation_strategy: self
   has_many :companies
+  attribute :role, :string, default: 'admin'
+  # before_create :set_user_role
   def jwt_payload
   super
   end
 
-  ROLES = %w{super_admin admin manager salar}
+  ROLES = %w{super_admin admin manager}
 
   ROLES.each do |role_name|
     define_method "#{role_name}?" do
@@ -16,16 +18,8 @@ class User < ApplicationRecord
     end
   end
 
-  # def super_admin?
-  #   role == 'super_admin'
-  # end
-
-  # def admin?
-  #   role == 'admin'
-  # end
-
-  # def manager?
-  #   role == 'manager'
+  # def set_user_role
+  #   self.role = 'admin'
   # end
 
 end
